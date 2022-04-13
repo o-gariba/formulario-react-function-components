@@ -1,9 +1,17 @@
+import { Component, Fragment } from 'react';
 import './App.css';
+import FormCadastro from './components/FormCadastro/FormCadastro';
 
-function App() {
-  return (
-    <h1>Formulário de cadastro</h1>
-  );
+class App extends Component{
+  render() {
+    return (
+      // Fragment encapsula todas as tags para retornarmos apenas uma tag mãe, e não é renderizado no HTML.
+      <Fragment>
+        <h1>Formulário de cadastro</h1>
+        <FormCadastro/>
+      </Fragment>
+    );
+  }
 }
 
 export default App;
