@@ -14,9 +14,7 @@ function FormCadastro() {
             <TextField id="nome" label="Nome Completo" variant="standard" margin="dense" fullWidth required 
                 value={nome} 
                 onChange={(evento => {
-                    // console.log(evento.target.value)
                     setNome(evento.target.value)
-                    // console.log(nome)
                 })}
             />
 
