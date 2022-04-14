@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, FormControlLabel, Switch, TextField } from "@mui/material"
 
 // Function components é uma abordagem mais moderna, não necessáriamente melhor. Acho q é mais rápida de ser criada e usada para quando estamos lidando com stateless components (não muda o estado, como um componente que atualiza um bloco de notas)
 function FormCadastro() {
+    const [nome, setNome] = useState("")
+    
     return(
-        <form>
-            <TextField id="nome" label="Nome Completo" variant="standard" margin="dense" fullWidth required/>
+        <form onSubmit={evento => {
+            evento.preventDefault()
+            console.log(nome)
+        }}>
+
+            <TextField id="nome" label="Nome Completo" variant="standard" margin="dense" fullWidth required 
+                value={nome} 
+                onChange={(evento => {
+                    // console.log(evento.target.value)
+                    setNome(evento.target.value)
+                    // console.log(nome)
+                })}
+            />
 
             <TextField id="cpf" label="CPF" variant="standard" margin="dense" fullWidth required/>
             
