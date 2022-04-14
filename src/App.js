@@ -13,7 +13,7 @@ class App extends Component{
       // <Fragment> encapsula todas as tags para retornarmos apenas uma tag mãe, e não é renderizado no HTML.
       // Usando o Material UI, vamos usar o <article> ao invés do Fragment, pois ele já pode ter estilos próprios. article por definição é um elemento auto contido dentro do site, que eu possa mudar ele de página sem perder informações  
       <Container maxWidth="sm" component="article">
-        <Typography variant='h4' align='center' component="h1">Formulário de cadastro</Typography>
+        <Typography variant='h4' align='center' component="h1">Formulário de Cadastro</Typography>
         <FormCadastro/>
       </Container>
     );
