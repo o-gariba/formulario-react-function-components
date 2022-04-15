@@ -14,10 +14,15 @@ class App extends Component{
       // Usando o Material UI, vamos usar o <article> ao invés do Fragment, pois ele já pode ter estilos próprios. article por definição é um elemento auto contido dentro do site, que eu possa mudar ele de página sem perder informações  
       <Container maxWidth="sm" component="article">
         <Typography variant='h4' align='center' component="h1">Formulário de Cadastro</Typography>
-        <FormCadastro/>
+        <FormCadastro aoEnviar={aoEnviarForms}/>
       </Container>
     );
   }
+
 }
+  
+  function aoEnviarForms(dados) {
+    console.log(dados)
+  }
 
 export default App;

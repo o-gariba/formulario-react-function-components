@@ -2,15 +2,25 @@ import React, { useState } from "react";
 // Usamos hooks para usar estados dentro de um function component. Pensando na função de uma função, não faria sentido ela guardar variáveis e estados, por isso usamos o hook.
 import { Button, FormControlLabel, Switch, TextField } from "@mui/material"
 
-// Function components é uma abordagem mais moderna, não necessáriamente melhor. Acho q é mais rápida de ser criada e usada para quando estamos lidando com stateless components (não muda o estado, como um componente que atualiza um bloco de notas)
-function FormCadastro() {
+// Function components é uma abordagem mais moderna, não necessáriamente melhor. Acho q é mais rápida de ser criada e usada para quando estamos lidando com stateless components (não muda o estado, como um componente que atualiza um bloco de notas). Deve começar com letra maiúscula!
+
+function FormCadastro({aoEnviar}) {
+
+    // useState é um dos usos possíveis do Hook
+    // Uma regra do uso de hook é que ele sempre deve ser usada no nível mais alto da função. Ou seja, fora de fors, whiles, ifs, etc...
+
     const [nome, setNome] = useState("")
+    const [cpf, setCpf] = useState("")
+    const [email, setEmail] = useState("")
+    const [promo, setPromo] = useState(true)
+    const [novidades, setNovidades] = useState(true)
+
     // Precisamos desses 2 elementos para fazer o gerenciamento do componente e chamar o ciclo de renderização quando o estado for alterado
     
     return(
         <form onSubmit={evento => {
             evento.preventDefault()
-            console.log(nome)
+            aoEnviar({nome, cpf, email, promo, novidades})
         }}>
 
             <TextField 
@@ -22,9 +32,9 @@ function FormCadastro() {
                 required 
 
                 value={nome} 
-                onChange={(evento => {
+                onChange={evento => {
                     setNome(evento.target.value)
-                })}
+                }}
             />
 
             <TextField 
@@ -34,6 +44,11 @@ function FormCadastro() {
                 margin="dense" 
                 fullWidth 
                 required
+
+                value={cpf} 
+                onChange={evento => {
+                    setCpf(evento.target.value)
+                }}
             />
             
             <TextField 
@@ -43,18 +58,33 @@ function FormCadastro() {
                 margin="dense" 
                 fullWidth 
                 required
+
+                value={email} 
+                onChange={evento => {
+                    setEmail(evento.target.value)
+                }}
             />
 
             {/* Existe o checkbox no Material UI mas hj está mais em moda usar o INTERRUPTOR (switch) para a mesma finalidade */}
 
             <FormControlLabel 
                 label="Promoções" 
-                control={<Switch name="promocoes" color="primary" defaultChecked />}
+                control={<Switch name="promocoes" color="primary" checked={promo} />}
+
+                value={promo} 
+                onChange={evento => {
+                    setPromo(evento.target.checked)
+                }}
             />
 
             <FormControlLabel 
                 label="Novidades" 
-                control={<Switch name="novidades" color="primary" defaultChecked />}
+                control={<Switch name="novidades" color="primary" checked={novidades} />}
+
+                value={novidades} 
+                onChange={evento => {
+                    setNovidades(evento.target.checked)
+                }}
             />
 
             <Button 
