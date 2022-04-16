@@ -4,7 +4,9 @@ import { Button, FormControlLabel, Switch, TextField } from "@mui/material"
 
 // Function components é uma abordagem mais moderna, não necessáriamente melhor. Acho q é mais rápida de ser criada e usada para quando estamos lidando com stateless components (não muda o estado, como um componente que atualiza um bloco de notas). Deve começar com letra maiúscula!
 
-function FormCadastro({aoEnviar}) {
+function FormCadastro({aoEnviar, validacaoCPF}) {
+
+    // passamos como parametro da função a desconstruão do objeto props, pegando apenas um de seus métodos. Isso agiliza o código e é uma técnica mais avançada de lidar com propriedades.
 
     // useState é um dos usos possíveis do Hook
     // Uma regra do uso de hook é que ele sempre deve ser usada no nível mais alto da função. Ou seja, fora de fors, whiles, ifs, etc...
@@ -15,12 +17,15 @@ function FormCadastro({aoEnviar}) {
     const [promo, setPromo] = useState(true)
     const [novidades, setNovidades] = useState(true)
 
+    const [erro, setErro] = useState({cpf: {valido:true, texto:""}})
+
     // Precisamos desses 2 elementos para fazer o gerenciamento do componente e chamar o ciclo de renderização quando o estado for alterado
     
     return(
         <form onSubmit={evento => {
             evento.preventDefault()
             aoEnviar({nome, cpf, email, promo, novidades})
+            validacaoCPF(cpf)
         }}>
 
             <TextField 
@@ -49,6 +54,14 @@ function FormCadastro({aoEnviar}) {
                 onChange={evento => {
                     setCpf(evento.target.value)
                 }}
+                
+                onBlur={evento => {
+                    const valido = validacaoCPF(evento.target.value)
+                    setErro({cpf: valido})
+                }}
+
+                error={!erro.cpf.valido}
+                helperText={erro.cpf.texto}
             />
             
             <TextField 
