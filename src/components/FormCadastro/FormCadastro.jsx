@@ -4,7 +4,7 @@ import { Button, FormControlLabel, Switch, TextField } from "@mui/material"
 
 // Function components é uma abordagem mais moderna, não necessáriamente melhor. Acho q é mais rápida de ser criada e usada para quando estamos lidando com stateless components (não muda o estado, como um componente que atualiza um bloco de notas). Deve começar com letra maiúscula!
 
-function FormCadastro({aoEnviar, validacaoCPF}) {
+function FormCadastro({aoEnviar, validacaoCPF, seErro}) {
 
     // passamos como parametro da função a desconstruão do objeto props, pegando apenas um de seus métodos. Isso agiliza o código e é uma técnica mais avançada de lidar com propriedades.
 
@@ -24,8 +24,10 @@ function FormCadastro({aoEnviar, validacaoCPF}) {
     return(
         <form onSubmit={evento => {
             evento.preventDefault()
-            aoEnviar({nome, cpf, email, promo, novidades})
             validacaoCPF(cpf)
+            if (erro.cpf.valido)
+                aoEnviar({nome, cpf, email, promo, novidades})
+            else seErro(); 
         }}>
 
             <TextField 
