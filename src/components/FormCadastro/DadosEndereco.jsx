@@ -3,7 +3,9 @@ import React from "react";
 
 function DadosEndereco() {
     return (
-        <form>
+        <form onSubmit={evento => {
+            evento.preventDefault()
+        }}>
             <TextField 
                 id="cep" 
                 label="CEP" 
