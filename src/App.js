@@ -22,7 +22,7 @@ class App extends Component{
 }
   
 function aoEnviarForms(dados) {
-  // console.log(dados)
+  console.log(dados)
 }
 
 function validaCPF(cpf) {
