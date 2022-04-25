@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material";
 import React, { Fragment, useState } from "react";
 import DadosEndereco from "./DadosEndereco";
 import DadosLogin from "./DadosLogin";
@@ -10,7 +9,7 @@ function FormCadastro({aoEnviar, validacaoCPF, seErro}) {
 
     const formularios = [
         <DadosLogin aoEnviar={proximo} />,
-        <DadosPessoais aoEnviar={proximo} validacaoCPF={validacaoCPF} seErro={seErro} />,
+        <DadosPessoais aoEnviar={proximo} validacaoCPF={validacaoCPF} seErro={seErro} aoEnviar2={aoEnviar}/>,
         <DadosEndereco aoEnviar={aoEnviar}/>,
     ]
 
@@ -24,7 +23,5 @@ function FormCadastro({aoEnviar, validacaoCPF, seErro}) {
         </Fragment>
     )
 }
-
-
 
 export default FormCadastro;

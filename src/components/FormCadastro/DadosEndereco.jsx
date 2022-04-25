@@ -21,6 +21,8 @@ function DadosEndereco({aoEnviar}) {
                 margin="normal" 
                 required 
 
+                value={cep}
+
                 onChange={(evento) => {
                     setCep(evento.target.value)
                 }}
@@ -34,6 +36,9 @@ function DadosEndereco({aoEnviar}) {
                 margin="normal" 
                 fullWidth 
                 required
+
+                value={endereco}
+
                 onChange={(evento) => {
                     setEndereco(evento.target.value)
                 }}
@@ -46,6 +51,9 @@ function DadosEndereco({aoEnviar}) {
                 variant="standard"
                 margin="normal" 
                 // required
+
+                value={numero}
+
                 onChange={(evento) => {
                     setNumero(evento.target.value)
                 }}
@@ -58,6 +66,9 @@ function DadosEndereco({aoEnviar}) {
                 variant="standard"
                 margin="normal" 
                 // required
+
+                value={estado}
+
                 onChange={(evento) => {
                     setEstado(evento.target.value)
                 }}
@@ -71,6 +82,9 @@ function DadosEndereco({aoEnviar}) {
                 margin="normal" 
                 fullWidth 
                 required
+                
+                value={cidade}
+                
                 onChange={(evento) => {
                     setCidade(evento.target.value)
                 }}

@@ -1,10 +1,14 @@
 import { TextField, Button } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 function DadosLogin({aoEnviar}) {
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
+
     return (
         <form onSubmit={evento => {
             evento.preventDefault()
+            // console.log({email, senha})
             aoEnviar()
         }}>
             <TextField 
@@ -13,7 +17,14 @@ function DadosLogin({aoEnviar}) {
                 type="email"
                 variant="standard"
                 margin="normal"
+                required
                 fullWidth
+                
+                value={email}
+
+                onChange={evento => {
+                    setEmail(evento.target.value)
+                }}
             />
 
             <TextField 
@@ -23,6 +34,13 @@ function DadosLogin({aoEnviar}) {
                 variant="standard"
                 margin="normal"
                 fullWidth
+                required
+
+                value={senha}
+
+                onChange={evento => {
+                    setSenha(evento.target.value)
+                }}
             />
 
             <Button 

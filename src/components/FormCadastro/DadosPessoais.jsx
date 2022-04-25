@@ -4,7 +4,7 @@ import { Button, FormControlLabel, Switch, TextField } from "@mui/material"
 
 // Function components é uma abordagem mais moderna, não necessáriamente melhor. Acho q é mais rápida de ser criada e usada para quando estamos lidando com stateless components (não muda o estado, como um componente que atualiza um bloco de notas). Deve começar com letra maiúscula!
 
-function DadosPessoais({aoEnviar, validacaoCPF, seErro}) {
+function DadosPessoais({aoEnviar, aoEnviar2, validacaoCPF, seErro}) {
 
     // passamos como parametro da função a desconstruão do objeto props, pegando apenas um de seus métodos. Isso agiliza o código e é uma técnica mais avançada de lidar com propriedades.
 
@@ -23,11 +23,16 @@ function DadosPessoais({aoEnviar, validacaoCPF, seErro}) {
     
     return(
         <form onSubmit={evento => {
+
             evento.preventDefault()
             validacaoCPF(cpf)
-            if (erro.cpf.valido)
-                aoEnviar({nome, cpf, email, promo, novidades})
-            else seErro(); 
+
+            if (erro.cpf.valido) {
+                aoEnviar2({nome, cpf, email, promo, novidades})
+                aoEnviar()
+            }
+            else seErro()
+
         }}>
 
             <TextField 
@@ -58,8 +63,8 @@ function DadosPessoais({aoEnviar, validacaoCPF, seErro}) {
                 }}
                 
                 onBlur={evento => {
-                    const valido = validacaoCPF(evento.target.value)
-                    setErro({cpf: valido})
+                    const validacao = validacaoCPF(evento.target.value)
+                    setErro({cpf: validacao})
                 }}
 
                 error={!erro.cpf.valido}
@@ -72,7 +77,7 @@ function DadosPessoais({aoEnviar, validacaoCPF, seErro}) {
                 variant="standard" 
                 margin="dense" 
                 fullWidth 
-                required
+                // required
 
                 value={email} 
                 onChange={evento => {
