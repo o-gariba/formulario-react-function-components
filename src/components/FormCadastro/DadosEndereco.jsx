@@ -1,10 +1,17 @@
 import { TextField, Button } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
-function DadosEndereco() {
+function DadosEndereco({aoEnviar}) {
+    const [cep, setCep] = useState('')
+    const [endereco, setEndereco] = useState('')
+    const [numero, setNumero] = useState('')
+    const [estado, setEstado] = useState('')
+    const [cidade, setCidade] = useState('')
+
     return (
         <form onSubmit={evento => {
             evento.preventDefault()
+            aoEnviar({cep, endereco, numero, estado, cidade})
         }}>
             <TextField 
                 id="cep" 
@@ -13,6 +20,10 @@ function DadosEndereco() {
                 variant="standard" 
                 margin="normal" 
                 required 
+
+                onChange={(evento) => {
+                    setCep(evento.target.value)
+                }}
             />
             
             <TextField 
@@ -23,6 +34,9 @@ function DadosEndereco() {
                 margin="normal" 
                 fullWidth 
                 required
+                onChange={(evento) => {
+                    setEndereco(evento.target.value)
+                }}
             />
 
             <TextField
@@ -32,6 +46,9 @@ function DadosEndereco() {
                 variant="standard"
                 margin="normal" 
                 // required
+                onChange={(evento) => {
+                    setNumero(evento.target.value)
+                }}
             />
 
             <TextField
@@ -41,6 +58,9 @@ function DadosEndereco() {
                 variant="standard"
                 margin="normal" 
                 // required
+                onChange={(evento) => {
+                    setEstado(evento.target.value)
+                }}
             />
 
             <TextField 
@@ -51,6 +71,9 @@ function DadosEndereco() {
                 margin="normal" 
                 fullWidth 
                 required
+                onChange={(evento) => {
+                    setCidade(evento.target.value)
+                }}
             />
 
             <Button 

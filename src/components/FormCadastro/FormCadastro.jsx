@@ -8,22 +8,19 @@ function FormCadastro({aoEnviar, validacaoCPF, seErro}) {
 
     const [qualForm, setQualForm] = useState(0)
 
+    const formularios = [
+        <DadosLogin aoEnviar={proximo} />,
+        <DadosPessoais aoEnviar={proximo} validacaoCPF={validacaoCPF} seErro={seErro} />,
+        <DadosEndereco aoEnviar={aoEnviar}/>,
+    ]
+
     function proximo() {
         setQualForm(qualForm + 1)
     }
 
-    function exibeForm(form) {
-        switch(form) {
-            case 0: return <DadosLogin aoEnviar={proximo} />
-            case 1: return <DadosPessoais aoEnviar={proximo} validacaoCPF={validacaoCPF} seErro={seErro} />
-            case 2: return <DadosEndereco aoEnviar={aoEnviar}/>
-            default: return <Typography>Erro ao selecionar formulário</Typography>
-        }
-    }
-
     return(
         <Fragment>
-            {exibeForm(qualForm)}
+            {formularios[qualForm]}
         </Fragment>
     )
 }
