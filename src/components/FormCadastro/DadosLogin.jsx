@@ -9,7 +9,7 @@ function DadosLogin({aoEnviar}) {
         <form onSubmit={evento => {
             evento.preventDefault()
             // console.log({email, senha})
-            aoEnviar()
+            aoEnviar({email, senha})
         }}>
             <TextField 
                 id="email" 

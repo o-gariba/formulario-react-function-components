@@ -28,8 +28,7 @@ function DadosPessoais({aoEnviar, aoEnviar2, validacaoCPF, seErro}) {
             validacaoCPF(cpf)
 
             if (erro.cpf.valido) {
-                aoEnviar2({nome, cpf, email, promo, novidades})
-                aoEnviar()
+                aoEnviar({nome, cpf, email, promo, novidades})
             }
             else seErro()
 
