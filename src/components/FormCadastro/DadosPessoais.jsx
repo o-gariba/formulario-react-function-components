@@ -4,7 +4,7 @@ import { Button, FormControlLabel, Switch, TextField } from "@mui/material"
 
 // Function components é uma abordagem mais moderna, não necessáriamente melhor. Acho q é mais rápida de ser criada e usada para quando estamos lidando com stateless components (não muda o estado, como um componente que atualiza um bloco de notas). Deve começar com letra maiúscula!
 
-function DadosPessoais({aoEnviar, aoEnviar2, validacaoCPF, seErro}) {
+function DadosPessoais({aoEnviar, validacoes, seErro}) {
 
     // passamos como parametro da função a desconstruão do objeto props, pegando apenas um de seus métodos. Isso agiliza o código e é uma técnica mais avançada de lidar com propriedades.
 
@@ -17,21 +17,21 @@ function DadosPessoais({aoEnviar, aoEnviar2, validacaoCPF, seErro}) {
     const [promo, setPromo] = useState(true)
     const [novidades, setNovidades] = useState(true)
 
-    const [erro, setErro] = useState({cpf: {valido:true, texto:""}})
+    const [erros, setErros] = useState({cpf: {valido:true, texto:""}})
 
     // Precisamos desses 2 elementos para fazer o gerenciamento do componente e chamar o ciclo de renderização quando o estado for alterado
     
+    function validarCampos(evento) {
+        const {name, value} = evento.target
+        const novoEstado = {...erros}
+        novoEstado[name] = validacoes[name](value)
+        setErros(novoEstado)
+    }
+
     return(
         <form onSubmit={evento => {
-
             evento.preventDefault()
-            validacaoCPF(cpf)
-
-            if (erro.cpf.valido) {
-                aoEnviar({nome, cpf, email, promo, novidades})
-            }
-            else seErro()
-
+            aoEnviar({nome, cpf, email, promo, novidades})
         }}>
 
             <TextField 
@@ -56,18 +56,18 @@ function DadosPessoais({aoEnviar, aoEnviar2, validacaoCPF, seErro}) {
                 fullWidth 
                 required
 
+                name="cpf"
+
                 value={cpf} 
+
                 onChange={evento => {
                     setCpf(evento.target.value)
                 }}
                 
-                onBlur={evento => {
-                    const validacao = validacaoCPF(evento.target.value)
-                    setErro({cpf: validacao})
-                }}
+                onBlur={validarCampos}
 
-                error={!erro.cpf.valido}
-                helperText={erro.cpf.texto}
+                error={!erros.cpf.valido}
+                helperText={erros.cpf.texto}
             />
             
             <TextField 
