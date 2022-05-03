@@ -4,7 +4,7 @@ import DadosEndereco from "./DadosEndereco";
 import DadosLogin from "./DadosLogin";
 import DadosPessoais from "./DadosPessoais";
 
-function FormCadastro({aoEnviar, validacoes, seErro}) {
+function FormCadastro({aoEnviar, seErro}) {
 
     const [qualForm, setQualForm] = useState(0)
 
@@ -20,9 +20,9 @@ function FormCadastro({aoEnviar, validacoes, seErro}) {
 
     
     const formularios = [
-        <DadosLogin aoEnviar={coletaDados} validacoes={validacoes} />,
-        <DadosPessoais aoEnviar={coletaDados} validacoes={validacoes} seErro={seErro} />,
-        <DadosEndereco aoEnviar={coletaDados} validacoes={validacoes}/>,
+        <DadosLogin aoEnviar={coletaDados}  />,
+        <DadosPessoais aoEnviar={coletaDados}  seErro={seErro} />,
+        <DadosEndereco aoEnviar={coletaDados} />,
         <Typography variant="h5" marginTop={5} textAlign={'center'}>Obrigado pelo cadastro!</Typography>
     ]
 

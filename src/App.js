@@ -8,6 +8,7 @@ import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 
 import {validaCPF, validaSenha} from './models/cadastro'
+import ValidacoesCadastro from './contexts/validacoesCadastro';
 
 class App extends Component{
   render() {
@@ -16,7 +17,9 @@ class App extends Component{
       // Usando o Material UI, vamos usar o <article> ao invés do Fragment, pois ele já pode ter estilos próprios. article por definição é um elemento auto contido dentro do site, que eu possa mudar ele de página sem perder informações  
       <Container maxWidth="sm" component="article">
         <Typography variant='h4' align='center' component="h1" marginBottom={4}>Formulário de Cadastro</Typography>
-        <FormCadastro aoEnviar={aoEnviarForms} validacoes={{cpf: validaCPF, senha: validaSenha}}  />
+        <ValidacoesCadastro.Provider value={{cpf: validaCPF, senha: validaSenha}}>
+        <FormCadastro aoEnviar={aoEnviarForms} />
+        </ValidacoesCadastro.Provider>
       </Container>
     );
   }

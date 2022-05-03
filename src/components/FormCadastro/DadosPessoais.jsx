@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 // Usamos hooks para usar estados dentro de um function component. Pensando na função de uma função, não faria sentido ela guardar variáveis e estados, por isso usamos o hook.
 import { Button, FormControlLabel, Switch, TextField } from "@mui/material"
+import useErros from "../../hooks/useErros";
+import ValidacoesCadastro from "../../contexts/validacoesCadastro";
 
 // Function components é uma abordagem mais moderna, não necessáriamente melhor. Acho q é mais rápida de ser criada e usada para quando estamos lidando com stateless components (não muda o estado, como um componente que atualiza um bloco de notas). Deve começar com letra maiúscula!
 
-function DadosPessoais({aoEnviar, validacoes, seErro}) {
+function DadosPessoais({aoEnviar}) {
 
     // passamos como parametro da função a desconstruão do objeto props, pegando apenas um de seus métodos. Isso agiliza o código e é uma técnica mais avançada de lidar com propriedades.
 
@@ -17,21 +19,25 @@ function DadosPessoais({aoEnviar, validacoes, seErro}) {
     const [promo, setPromo] = useState(true)
     const [novidades, setNovidades] = useState(true)
 
-    const [erros, setErros] = useState({cpf: {valido:true, texto:""}})
+    const validacoes = useContext(ValidacoesCadastro)
+
+    // const [erros, setErros] = useState({cpf: {valido:true, texto:""}})
+
+    const [erros, validarCampos, possoEnviar] = useErros(validacoes)
 
     // Precisamos desses 2 elementos para fazer o gerenciamento do componente e chamar o ciclo de renderização quando o estado for alterado
     
-    function validarCampos(evento) {
-        const {name, value} = evento.target
-        const novoEstado = {...erros}
-        novoEstado[name] = validacoes[name](value)
-        setErros(novoEstado)
-    }
+    // function validarCampos(evento) {
+    //     const {name, value} = evento.target
+    //     const novoEstado = {...erros}
+    //     novoEstado[name] = validacoes[name](value)
+    //     setErros(novoEstado)
+    // }
 
     return(
         <form onSubmit={evento => {
             evento.preventDefault()
-            aoEnviar({nome, cpf, email, promo, novidades})
+            if (possoEnviar()) aoEnviar({nome, cpf, email, promo, novidades})
         }}>
 
             <TextField 
